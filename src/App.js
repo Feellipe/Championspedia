@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./styles.css";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import { CardList } from "./components/card-list/card-list.component";
 import { SearchBox } from "./components/searchBox/search-box.components";
@@ -36,12 +37,14 @@ export default class App extends Component {
     );
     return (
       <div className="App">
-        <SearchBox
-          type="search"
-          placeholder="Search the Champion"
-          handleChange={this.handleChange}
-        />
-        <CardList champions={championsFiltered} />
+        <InfiniteScroll dataLength={this.state.champions.length}>
+          <SearchBox
+            type="search"
+            placeholder="Search the Champion"
+            handleChange={this.handleChange}
+          />
+          <CardList champions={championsFiltered} />
+        </InfiniteScroll>
       </div>
     );
   }
